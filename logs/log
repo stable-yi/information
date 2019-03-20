@@ -1,0 +1,6 @@
+INFO _internal.py:88  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO _internal.py:88  * Restarting with stat
+WARNING _internal.py:88  * Debugger is active!
+INFO _internal.py:88  * Debugger PIN: 193-797-501
+INFO _internal.py:88 127.0.0.1 - - [20/Mar/2019 22:15:28] "GET / HTTP/1.1" 200 -
+INFO _internal.py:88 127.0.0.1 - - [20/Mar/2019 22:15:28] "GET /favicon.ico HTTP/1.1" 404 -
