@@ -1,4 +1,4 @@
-
+from flask import current_app
 from flask_migrate import MigrateCommand,Migrate
 from flask_script import Manager
 from info import create_app,db
@@ -14,11 +14,6 @@ manager = Manager(app)
 Migrate(app,db)
 manager.add_command("db",MigrateCommand)
 
-
-#  定义一个index视图
-@app.route("/")
-def index():
-    return "index"
 
 
 if __name__ == "__main__":
