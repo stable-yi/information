@@ -56,14 +56,18 @@ def create_app(config_name):
     redis_store = redis.StrictRedis(host=config[config_name].REDIS_HOST, port=config[config_name].REDIS_PORT)
 
     # 跨站请求验证
-    CSRFProtect(app)
+    # CSRFProtect(app)
 
     # 设置session保存位置
     Session(app)
 
-    # 注册蓝图
+    # 注册蓝图index界面
     from info.modules.index import index_blue
     app.register_blueprint(index_blue)
+
+    # 注册蓝图passport界面
+    from info.modules.passport import passport_blue
+    app.register_blueprint(passport_blue)
 
     return app
 
