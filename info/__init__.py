@@ -1,5 +1,3 @@
-
-
 import redis
 from flask_session import Session
 from flask_wtf.csrf import CSRFProtect
@@ -64,7 +62,7 @@ def create_app(config_name):
     Session(app)
 
     # 注册蓝图
-    from info.modules.indexs import index_blue
+    from info.modules.index import index_blue
     app.register_blueprint(index_blue)
 
     return app
