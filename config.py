@@ -28,6 +28,9 @@ class Config(object):
     # 配置日志等级
     LOG_LEVEL = logging.DEBUG
 
+    # 配置数据库可以在每次请求结束后自动提交
+    SQLALCHEMY_COMMIT_ON_TEARDOWN = True
+
 
 class DevelopementConfig(Config):
     """开发模式下的配置"""

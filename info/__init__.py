@@ -1,11 +1,14 @@
 import redis
 from flask_session import Session
-from flask_wtf.csrf import CSRFProtect
+from flask_wtf.csrf import CSRFProtect,generate_csrf
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from config import config
 import logging
 from logging.handlers import RotatingFileHandler
+
+from config import config
+from info.utils.common import do_index_class
+
 # 将msyql数据库和应用进行关联
 db = SQLAlchemy()
 
@@ -56,10 +59,23 @@ def create_app(config_name):
     redis_store = redis.StrictRedis(host=config[config_name].REDIS_HOST, port=config[config_name].REDIS_PORT)
 
     # 跨站请求验证
-    # CSRFProtect(app)
+    CSRFProtect(app)
 
     # 设置session保存位置
     Session(app)
+
+    # 定义请求钩子，在每次请求结束后返回csrf_token值
+    @app.after_request
+    def after_request(response):
+        # 生成csrf_token
+        csrf_token = generate_csrf()
+
+        response.set_cookie("csrf_token",csrf_token)
+
+        return response
+
+    # 将自定义的过滤器添加到app库里面
+    app.add_template_filter(do_index_class,"index_class")
 
     # 注册蓝图index界面
     from info.modules.index import index_blue
