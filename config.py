@@ -1,4 +1,6 @@
 """项目的所有配置文件"""
+#! /usr/bin/env python
+# coding:utf-8
 import redis
 import logging
 

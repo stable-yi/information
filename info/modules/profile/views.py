@@ -1,3 +1,7 @@
+#! /usr/bin/env python
+# coding:utf-8
+
+
 from flask import abort
 from flask import current_app
 from flask import g, jsonify

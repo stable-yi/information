@@ -1,3 +1,7 @@
+#! /usr/bin/env python
+# coding:utf-8
+
+
 """news界面"""
 
 from flask import Blueprint

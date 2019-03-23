@@ -1,3 +1,6 @@
+#! /usr/bin/env python
+# coding:utf-8
+
 import redis
 from flask import g
 from flask import render_template

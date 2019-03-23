@@ -1,3 +1,6 @@
+#! /usr/bin/env python
+# coding:utf-8
+
 from flask import current_app, jsonify
 from flask import g
 from flask import render_template
