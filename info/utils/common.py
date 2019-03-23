@@ -1,4 +1,4 @@
-# 自定义过滤器用于点击排行
+
 import functools
 
 from flask import current_app
