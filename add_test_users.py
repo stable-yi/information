@@ -1,10 +1,12 @@
+#! /usr/bin/env python
+# coding:utf-8
+
 import datetime
 import random
 
 from info import db
 from info.models import User
-#! /usr/bin/env python
-# coding:utf-8
+
 # from manage import app
 
 
