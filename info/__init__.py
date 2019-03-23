@@ -1,4 +1,6 @@
 import redis
+from flask import g
+from flask import render_template
 from flask_session import Session
 from flask_wtf.csrf import CSRFProtect,generate_csrf
 from flask import Flask
@@ -7,7 +9,8 @@ import logging
 from logging.handlers import RotatingFileHandler
 
 from config import config
-from info.utils.common import do_index_class
+from info.utils.common import do_index_class,user_login_data
+
 
 # 将msyql数据库和应用进行关联
 db = SQLAlchemy()
@@ -74,6 +77,18 @@ def create_app(config_name):
 
         return response
 
+    # 捕获所有的404错误界面
+
+    @app.errorhandler(404)
+    @user_login_data
+    def page_not_found(error):
+        user = g.user
+        data = {"user_info": user.to_dict() if user else None}
+        return render_template('news/404.html', data=data)
+
+
+
+
     # 将自定义的过滤器添加到app库里面
     app.add_template_filter(do_index_class,"index_class")
 
@@ -84,6 +99,17 @@ def create_app(config_name):
     # 注册蓝图passport界面
     from info.modules.passport import passport_blue
     app.register_blueprint(passport_blue)
+
+    # 注册蓝图news界面
+    from info.modules.news import news_blue
+    app.register_blueprint(news_blue)
+
+    # 注册profile 界面
+    from info.modules.profile import profile_blue
+    app.register_blueprint(profile_blue)
+    # 注册admin界面
+    from info.modules.admin import admin_blue
+    app.register_blueprint(admin_blue)
 
     return app
 

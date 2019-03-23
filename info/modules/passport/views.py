@@ -5,8 +5,10 @@ from flask import current_app
 from flask import make_response
 from flask import request, jsonify
 import re
+from flask import redirect
 
 from flask import session
+from flask import url_for
 
 from info.utils.response_code import RET
 from . import passport_blue
@@ -16,6 +18,10 @@ from info import constants
 from info.models import User
 from info.utils.yuntongxun.sms import CCP
 from info import db
+
+
+
+
 
 @passport_blue.route("/image_code")
 def get_image_code():
@@ -279,5 +285,7 @@ def logout():
     session.pop("nick_name",None)
     session.pop("mobile",None)
     session.pop("user_id",None)
+    session.pop('is_admin', None)
 
-    return jsonify(errno=RET.OK, errmsg="OK")
+    return redirect(url_for("admin.admin_login"))
+    # return jsonify(errno=RET.OK, errmsg="OK")
